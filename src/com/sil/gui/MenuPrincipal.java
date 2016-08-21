@@ -11,12 +11,12 @@ import com.sil.dao.Reportes;
  *
  * @author Adrian Floers
  */
-public class Menu_Principal extends javax.swing.JFrame {
+public class MenuPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public Menu_Principal() {
+    public MenuPrincipal() {
         initComponents();
     }
 
@@ -145,7 +145,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     private void jMenuItemLicoreriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLicoreriasActionPerformed
         // TODO add your handling code here: despliega menu licorerias
 
-        Operaciones_Licorerias ventanaLicorerias = new Operaciones_Licorerias();
+        OperacionesLicorerias ventanaLicorerias = new OperacionesLicorerias();
 
         ventanaLicorerias.setVisible(true);
         this.dispose();
@@ -155,7 +155,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         // TODO add your handling code here: Aqui llamamos a la ventana de
         // Operaciones_Usuario
 
-        Operaciones_Usuarios ventanaRegistro = new Operaciones_Usuarios();
+        OperacionesUsuarios ventanaRegistro = new OperacionesUsuarios();
 
         ventanaRegistro.setVisible(true);
         this.dispose();
@@ -164,7 +164,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     private void jMenuItemTipoProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTipoProductosActionPerformed
         // TODO add your handling code here: Llama al menu Tipo Productos
 
-        Operaciones_TipoProductos tipoProductos = new Operaciones_TipoProductos();
+        OperacionesTipoProductos tipoProductos = new OperacionesTipoProductos();
 
         this.dispose();
         tipoProductos.setVisible(true);
@@ -215,8 +215,10 @@ public class Menu_Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -224,7 +226,7 @@ public class Menu_Principal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Menu_Principal().setVisible(true);
+            new MenuPrincipal().setVisible(true);
         });
     }
 

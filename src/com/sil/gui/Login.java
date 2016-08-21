@@ -17,7 +17,7 @@ import com.sil.dao.Usuarios;
 public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify  
-    private final Menu_Principal menuPpal;
+    private final MenuPrincipal menuPpal;
     private final Usuarios accesoUsuario;
     private final Conexion Conecta;
     private Connection Conector;
@@ -28,7 +28,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
 
         this.Conecta = new Conexion();
-        this.menuPpal = new Menu_Principal();
+        this.menuPpal = new MenuPrincipal();
         this.accesoUsuario = new Usuarios();
         initComponents();
     }

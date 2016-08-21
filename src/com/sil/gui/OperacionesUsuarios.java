@@ -21,22 +21,22 @@ import com.sil.dao.Usuarios;
  * @author Adrian
  * @version 1
  */
-public class Operaciones_Usuarios extends javax.swing.JFrame {
+public class OperacionesUsuarios extends javax.swing.JFrame {
 
     private final Conexion Conecta;
     private Connection Conector;
     private ResultSet Rs;
     private final Usuarios usuario;
 
-    private final Menu_Principal menuPrincipal;
+    private final MenuPrincipal menuPrincipal;
 
     /**
      * Creates new form NewJFrame
      */
-    public Operaciones_Usuarios() {
+    public OperacionesUsuarios() {
         this.Conecta = new Conexion();
         this.usuario = new Usuarios();
-        this.menuPrincipal = new Menu_Principal();
+        this.menuPrincipal = new MenuPrincipal();
         initComponents();
     }
 
@@ -259,14 +259,16 @@ public class Operaciones_Usuarios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Operaciones_Usuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OperacionesUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Operaciones_Usuarios().setVisible(true);
+            new OperacionesUsuarios().setVisible(true);
         });
     }
 

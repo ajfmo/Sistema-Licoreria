@@ -5,66 +5,26 @@
  */
 package com.sil.gui;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import com.sil.dao.Conexion;
-import com.sil.dao.Tipos;
+import com.sil.dao.Licorerias;
 
 /**
- * class Operaciones_TipoProductos:
  *
- * Esta clase es la ventana donde se procedera a realizar las operaciones de los
- * tipos de productos.
- *
- * @author Adrian
+ * @author Adrian Floers
  */
-public class Operaciones_TipoProductos extends javax.swing.JFrame {
+public class OperacionesLicorerias extends javax.swing.JFrame {
+    
+    private final Licorerias licoreria;
+    private final MenuPrincipal menuPrincipal;
 
-    // Parametos y variables de la clase
-    private static final long serialVersionUID = 1L;
-
-    private static final Conexion conecta = new Conexion();
-    private static Connection Conector;
-    private static Statement St;
-    private static ResultSet Rs;
-    //Cierre de declaracion de variables.
-
-    /**
-     * Metodo MostrarRegistros:
-     *
-     * Muestra en el combobox la lista de registros disponibles en la base de
-     * datos
-     */
-    private void muestraTipos() {
-
-        String Query = "SELECT descripcionTipo FROM sil.tipoproductos;";
-        try {
-            Conector = conecta.Conectar();
-            St = Conector.createStatement();
-            Rs = St.executeQuery(Query);
-            while (Rs.next()) {
-                jComboTipos.addItem(Rs.getString("descripcionTipo"));
-            }
-            conecta.cierraConexion();
-            Rs.close();
-        } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Error en la consulta.");
-            Logger.getLogger(Operaciones_TipoProductos.class.getName()).log(Level.SEVERE, null, sqle);
-        }
-    }
 
     /**
      * Creates new form NewJFrame
      */
-    public Operaciones_TipoProductos() {
+    public OperacionesLicorerias() {
+        this.menuPrincipal = new MenuPrincipal();
+        this.licoreria = new Licorerias();
         initComponents();
-
-        muestraTipos();
+        licoreria.muestraRegistros(jComboLicorerias);
     }
 
     /**
@@ -76,28 +36,28 @@ public class Operaciones_TipoProductos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelDescripcion = new javax.swing.JLabel();
-        jLabelTipos = new javax.swing.JLabel();
-        jTextTipo = new javax.swing.JTextField();
-        jComboTipos = new javax.swing.JComboBox<>();
+        lblID = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextLicoreria = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        jComboLicorerias = new javax.swing.JComboBox<>();
         jButtonRegistrar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonSelecciona = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Matenimiento Tipos");
+        setTitle("Mantenimiento Licorerias");
 
-        jLabelDescripcion.setText("Descripcion:");
+        lblID.setText("Descripcion:");
 
-        jLabelTipos.setText("Tipos de Productos:");
+        jLabel1.setText("Seleccionar licoreria:");
 
-        jTextTipo.setColumns(10);
+        jTextLicoreria.setColumns(10);
 
-        jComboTipos.addActionListener(new java.awt.event.ActionListener() {
+        jComboLicorerias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboTiposActionPerformed(evt);
+                jComboLicoreriasActionPerformed(evt);
             }
         });
 
@@ -127,111 +87,117 @@ public class Operaciones_TipoProductos extends javax.swing.JFrame {
 
         jButtonSelecciona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/VER.gif"))); // NOI18N
         jButtonSelecciona.setText("Seleccionar");
+        jButtonSelecciona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSeleccionaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboLicorerias, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonSelecciona))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonRegistrar)
+                    .addComponent(lblID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonRegistrar)
-                        .addGap(18, 18, 18)
                         .addComponent(jButtonEliminar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelTipos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboTipos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSelecciona))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabelDescripcion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jSeparator1)
+                    .addComponent(jTextLicoreria, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTipos)
-                    .addComponent(jComboTipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboLicorerias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSelecciona))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDescripcion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextLicoreria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancelar)
                     .addComponent(jButtonEliminar)
-                    .addComponent(jButtonRegistrar)
-                    .addComponent(jButtonCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonRegistrar))
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboTiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTiposActionPerformed
-        // TODO add your handling code here: Muestra en el jTextTipo la
-        // seleccion que se haga en el jComboTipos
-
-        jTextTipo.setText((String) jComboTipos.getSelectedItem());
-
-        // MANEJO DE RECURSOS!!!! --- Este bloque no esta jodiento - DESCARTADO
-    }//GEN-LAST:event_jComboTiposActionPerformed
-
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
-        // TODO add your handling code here: agrega registros a la base de datos
-        // mediante el metodo RegistrarTipos
+        // Agrega registros a la base de datos mediante el metodo RegistrarLicorerias
 
-        Tipos registraTipos = new Tipos();
-
-        // Registra el registro jeje :P
-        registraTipos.RegistrarTipo(jTextTipo.getText());
+        // Registra la informacion recibida en el jTextLicoreria
+        licoreria.registraLicoreria(jTextLicoreria.getText());
 
         // Actualiza la lista de registros
-        jComboTipos.removeAllItems();
-        muestraTipos();
-        jTextTipo.setText("");
+        jComboLicorerias.removeAllItems();
+        licoreria.muestraRegistros(jComboLicorerias);
+        jTextLicoreria.setText("");
 
+        // Cierra las consultas y conexiones si estan abiertas
+        licoreria.cierraConsultas();
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here: Elimina un registro de la base de
         // datos y muestra en el combobox los registros actuales
-
-        Tipos eliminaRegistros = new Tipos();
-
-        // Elimina el registro
-        eliminaRegistros.EliminarTipo(jTextTipo.getText());
+        // Aplicamos el metodo EliminarLicoreria que elimina el registro
+        // indicado en el jTextLicoreria
+        licoreria.eliminaLicoreria(jTextLicoreria.getText());
 
         // Actualiza la lista de registros
-        jComboTipos.removeAllItems();
-        muestraTipos();
-        jTextTipo.setText("");
+        jComboLicorerias.removeAllItems();
+        licoreria.muestraRegistros(jComboLicorerias);
+        jTextLicoreria.setText("");
 
+        // Cierra las consultas y conexiones si estan abiertas
+        licoreria.cierraConsultas();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here: cierra la ventana actual y llama al
         // menu principal.
-
-        Menu_Principal menuPrincipal = new Menu_Principal();
-
+        
+        // Desechamos esta ventana  
         this.dispose();
+        // Cierra las consultas y conexiones si estan abiertas
+        licoreria.cierraConsultas();
+        // Mostramos el menu principal
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jComboLicoreriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboLicoreriasActionPerformed
+        // TODO add your handling code here: Muestra en el jTextLicoreria la
+        // seleccion que se haga en el jComboLicorerias
+        jTextLicoreria.setText((String) jComboLicorerias.getSelectedItem());
+    }//GEN-LAST:event_jComboLicoreriasActionPerformed
+
+    private void jButtonSeleccionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionaActionPerformed
+        // TODO add your handling code here: Selecciona una licoreria para
+        // marcarla como activa
+        licoreria.seleccionaLicoreria((String) jComboLicorerias.getSelectedItem());
+    }//GEN-LAST:event_jButtonSeleccionaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,14 +216,19 @@ public class Operaciones_TipoProductos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Operaciones_Licorerias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OperacionesLicorerias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Operaciones_TipoProductos().setVisible(true);
+            new OperacionesLicorerias().setVisible(true);
         });
     }
 
@@ -266,10 +237,10 @@ public class Operaciones_TipoProductos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonSelecciona;
-    private javax.swing.JComboBox<String> jComboTipos;
-    private javax.swing.JLabel jLabelDescripcion;
-    private javax.swing.JLabel jLabelTipos;
+    private javax.swing.JComboBox<String> jComboLicorerias;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextTipo;
+    private javax.swing.JTextField jTextLicoreria;
+    private javax.swing.JLabel lblID;
     // End of variables declaration//GEN-END:variables
 }

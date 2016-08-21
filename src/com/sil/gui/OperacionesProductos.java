@@ -20,14 +20,14 @@ public class OperacionesProductos extends javax.swing.JFrame {
     private static final long serialVersionUID = 1L;
 
     private final Productos productos;
-    private final Menu_Principal menuPpal;
+    private final MenuPrincipal menuPpal;
 
     /**
      * Creates new form NewJFrame
      */
     public OperacionesProductos() {
         this.productos = new Productos();
-        this.menuPpal = new Menu_Principal();
+        this.menuPpal = new MenuPrincipal();
         initComponents();
         productos.muestraTipo(jComboTipos);
     }
