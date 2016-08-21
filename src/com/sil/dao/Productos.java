@@ -19,13 +19,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Productos {
 
-    private static Connection Conector;
-    private static final Conexion Conecta = new Conexion();
-    private static Statement St;
-    private static ResultSet Rs;
+    private static Connection conector;
+    private static final Conexion conecta = new Conexion();
+    private static Statement statement;
+    private static ResultSet resultSet;
+    private String query;
 
-    public void buscaProducto() {
-
+    /**
+     * Metodo ejectutarConsulta: Conecta a la base de datos y ejecuta la
+     * consulta recibiendo el query
+     */
+    private static void ejectutarConsulta(String Query) throws SQLException {
+        conector = conecta.conectar();
+        statement = conector.createStatement();
+        resultSet = statement.executeQuery(Query);
     }
 
     /**
@@ -37,26 +44,23 @@ public class Productos {
      * @throws java.sql.SQLException
      */
     public void llenarTabla(JTable table) throws SQLException {
-        String Query = "SELECT codProducto, descripcionProducto, tipoProducto,"
+        query = "SELECT codProducto, descripcionProducto, tipoProducto,"
                 + " existenciaProducto, costoProducto, precioProducto FROM productos;";
         try {
-            Conector = Conecta.Conectar();
-            St = Conector.createStatement();
-            Rs = St.executeQuery(Query);
-
+            ejectutarConsulta(query);
             //To remove previously added rows
             while (table.getRowCount() > 0) {
                 ((DefaultTableModel) table.getModel()).removeRow(0);
             }
-            int columns = Rs.getMetaData().getColumnCount();
-            while (Rs.next()) {
+            int columns = resultSet.getMetaData().getColumnCount();
+            while (resultSet.next()) {
                 Object[] row = new Object[columns];
                 for (int i = 1; i <= columns; i++) {
-                    row[i - 1] = Rs.getObject(i);
+                    row[i - 1] = resultSet.getObject(i);
                 }
-                ((DefaultTableModel) table.getModel()).insertRow(Rs.getRow() - 1, row);
+                ((DefaultTableModel) table.getModel()).insertRow(resultSet.getRow() - 1, row);
             }
-            cierraConsultas();
+            cerrarConsultas();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error en la consulta MySQL");
             Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
@@ -71,48 +75,47 @@ public class Productos {
      *
      * @param jCombo
      */
-    public void muestraTipo(JComboBox jCombo) {
-        String Query = "SELECT descripcionTipo FROM sil.tipoproductos;";
+    public void mostrarTipo(JComboBox jCombo) {
+        query = "SELECT descripcionTipo FROM sil.tipoproductos;";
         try {
-            Conector = Conecta.Conectar();
-            St = Conector.createStatement();
-            Rs = St.executeQuery(Query);
-            while (Rs.next()) {
-                jCombo.addItem(Rs.getString("descripcionTipo"));
+            ejectutarConsulta(query);
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                jCombo.addItem(resultSet.getString("descripcionTipo"));
             }
-            cierraConsultas();
+            cerrarConsultas();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error en la consulta.");
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, sqle);
         }
     }
 
-    public void registraProducto() {
+    public void registrarProducto() {
 
     }
 
-    public void modificaProducto() {
+    public void modificarProducto() {
 
     }
 
-    public void eliminaProducto() {
+    public void eliminarProducto() {
 
     }
 
     /**
-     * Metodo cierraConsultas Este metodo cierra las consultas y conexiones si
+     * Metodo cerrarConsultas Este metodo cierra las consultas y conexiones si
      * las hay abiertas.
      */
-    public void cierraConsultas() {
+    public void cerrarConsultas() {
         try {
-            if (Conector != null) {
-                Conector.close();
+            if (conector != null) {
+                conector.close();
             }
-            if (St != null) {
-                St.close();
+            if (statement != null) {
+                statement.close();
             }
-            if (Rs != null) {
-                Rs.close();
+            if (resultSet != null) {
+                resultSet.close();
             }
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error al cerrar");

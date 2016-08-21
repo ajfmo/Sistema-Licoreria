@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class Licorerias {
 
-    private final Conexion Conecta = new Conexion();
-    private Connection Conector;
-    private Statement St;
-    private ResultSet Rs;
+    private final Conexion conecta = new Conexion();
+    private Connection conector;
+    private Statement statement;
+    private ResultSet resultSet;
 
     /**
      * Este metodo muestra la lista de licorerias almacenadas en la BD Quiza no
@@ -29,21 +29,21 @@ public class Licorerias {
      *
      * @return String licorerias
      */
-    public String consultaLicoreria() {
+    public String consultarLicoreria() {
 
         String licoreria = null;
         String Query = "SELECT nombreLicoreria FROM sil.licoreria";
 
         try {
             // Conexion con BBDD
-            Conector = Conecta.Conectar();
-            St = Conector.createStatement();
+            conector = conecta.conectar();
+            statement = conector.createStatement();
             // Consulta
-            Rs = St.executeQuery(Query);
-            while (Rs.next()) {
-                Rs.getString("nombreLicoreria");
+            resultSet = statement.executeQuery(Query);
+            while (resultSet.next()) {
+                resultSet.getString("nombreLicoreria");
             }
-            cierraConsultas();
+            cerrarConsultas();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error en la consulta", "Error", JOptionPane.ERROR);
             Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
@@ -56,19 +56,19 @@ public class Licorerias {
      * disponibles en la base de datos
      * @param jCombo
      */
-    public void muestraRegistros(JComboBox jCombo) {
+    public void mostrarRegistros(JComboBox jCombo) {
         // Muestra en el combobox la lista de empresas disponibles en la base de
         // datos
         String Query = "SELECT nombreLicoreria FROM sil.licorerias;";
         try {
-            Conector = Conecta.Conectar();
-            St = Conector.createStatement();
-            Rs = St.executeQuery(Query);
-            while (Rs.next()) {
-                jCombo.addItem(Rs.getString("nombreLicoreria"));
+            conector = conecta.conectar();
+            statement = conector.createStatement();
+            resultSet = statement.executeQuery(Query);
+            while (resultSet.next()) {
+                jCombo.addItem(resultSet.getString("nombreLicoreria"));
             }
             // Libera recursos del sistema
-            cierraConsultas();
+            cerrarConsultas();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error en la consulta.");
             Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
@@ -80,19 +80,19 @@ public class Licorerias {
      *
      * @param nombreLicoreria recibe el nombre de la licoreria
      */
-    public void eliminaLicoreria(String nombreLicoreria) {
+    public void eliminarLicoreria(String nombreLicoreria) {
 
         String Query = "DELETE FROM licorerias WHERE `nombreLicoreria`='" + nombreLicoreria + "';";
 
         try {
-            Conector = Conecta.Conectar();
+            conector = conecta.conectar();
             // Se crea la sentencia
-            St = Conector.createStatement();
+            statement = conector.createStatement();
             // Se ejecuta la sentencia
-            St.executeUpdate(Query);
+            statement.executeUpdate(Query);
             JOptionPane.showMessageDialog(null, "Registro Eliminado con exito");
             // Se liberan recursos
-            cierraConsultas();
+            cerrarConsultas();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el registro");
             Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
@@ -104,24 +104,24 @@ public class Licorerias {
      *
      * @param nombreLicoreria recibe el nombre de la licoreria
      */
-    public void registraLicoreria(String nombreLicoreria) {
+    public void registrarLicoreria(String nombreLicoreria) {
 
         String Query = "INSERT INTO `sil`.`licorerias` (`nombreLicoreria`) VALUES ('" + nombreLicoreria + "');";
 
         try {
             // Se establece la conexion
-            Conector = Conecta.Conectar();
+            conector = conecta.conectar();
             // Se crea la sentencia
-            St = Conector.createStatement();
+            statement = conector.createStatement();
             // Se ejecuta la sentencia
-            St.executeUpdate(Query);
+            statement.executeUpdate(Query);
             JOptionPane.showMessageDialog(null, "Registro exitoso");
             // Se liberan recursos
-            cierraConsultas();
+            cerrarConsultas();
             // -----En Desarrollo-----Si ya existe un registro con el mismo
             // nombre
-            /* if (Rs.get) { */
-            // St.executeUpdate(Query);
+            /* if (resultSet.get) { */
+            // statement.executeUpdate(Query);
             /*
 			 * } else { JOptionPane.showMessageDialog(null,
 			 * "Ya existe una empresa con el mismo nombre, debe ingresar otro nombre"
@@ -139,10 +139,10 @@ public class Licorerias {
      *
      * @param licoreria recibe el nombre de la licoreria
      */
-    public void seleccionaLicoreria(String licoreria) {
+    public void seleccionarLicoreria(String licoreria) {
         try {
-            Conector = Conecta.Conectar();
-            St = Conector.createStatement();
+            conector = conecta.conectar();
+            statement = conector.createStatement();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error al mostrar empresas", "Error en la consulta",
                     JOptionPane.ERROR_MESSAGE);
@@ -155,16 +155,16 @@ public class Licorerias {
      * sí existen.
      *
      */
-    public void cierraConsultas() {
+    public void cerrarConsultas() {
         try {
-            if (Rs != null) {
-                Rs.close();
+            if (resultSet != null) {
+                resultSet.close();
             }
-            if (St != null) {
-                St.close();
+            if (statement != null) {
+                statement.close();
             }
-            if (Conector != null) {
-                Conector.close();
+            if (conector != null) {
+                conector.close();
             }
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error cerrando la conexion!", "Error", JOptionPane.ERROR_MESSAGE);

@@ -23,26 +23,26 @@ import javax.swing.JOptionPane;
  */
 public class Tipos {
 
-    private final Conexion Conecta = new Conexion();
-    private Connection Conector;
-    private Statement St;
-    private ResultSet Rs;
+    private final Conexion conecta = new Conexion();
+    private Connection conector;
+    private Statement statement;
+    private ResultSet resultSet;
 
     /**
-     * Metodo CerrarConsultas: Este metodo permite cerrar consultas y conexion
-     * sí existen.
+     * Metodo cerrarConsultas: Este metodo permite cerrar consultas y conexion
+ sí existen.
      *
      */
-    public void CerrarConsultas() {
+    public void cerrarConsultas() {
         try {
-            if (Rs != null) {
-                Rs.close();
+            if (resultSet != null) {
+                resultSet.close();
             }
-            if (St != null) {
-                St.close();
+            if (statement != null) {
+                statement.close();
             }
-            if (Conector != null) {
-                Conector.close();
+            if (conector != null) {
+                conector.close();
             }
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error cerrando la conexion!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -55,21 +55,21 @@ public class Tipos {
      *
      * @return tipo
      */
-    public String ConsultaTipo() {
+    public String consultarTipo() {
 
         String tipo = null;
         String Query = "SELECT descripcionTipo FROM sil.tipoproductos";
 
         try {
             // Conexion con BBDD
-            Conector = Conecta.Conectar();
-            St = Conector.createStatement();
+            conector = conecta.conectar();
+            statement = conector.createStatement();
             // Consulta
-            Rs = St.executeQuery(Query);
-            while (Rs.next()) {
-                Rs.getString("descripcionTipo");
-                Rs.close();
-                Conector.close();
+            resultSet = statement.executeQuery(Query);
+            while (resultSet.next()) {
+                resultSet.getString("descripcionTipo");
+                resultSet.close();
+                conector.close();
             }
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error en la consulta", "Error en la consulta", ImageObserver.ERROR);
@@ -83,20 +83,20 @@ public class Tipos {
      *
      * @param descripcionTipo recibe la descripcion del tipo de producto
      */
-    public void EliminarTipo(String descripcionTipo) {
+    public void eliminarTipo(String descripcionTipo) {
 
         String Query = "DELETE FROM tipoproductos WHERE `descripcionTipo`='" + descripcionTipo + "';";
 
         try {
-            Conector = Conecta.Conectar();
+            conector = conecta.conectar();
             // Se crea la sentencia
-            St = Conector.createStatement();
+            statement = conector.createStatement();
             // Se ejecuta la sentencia
-            St.executeUpdate(Query);
+            statement.executeUpdate(Query);
             JOptionPane.showMessageDialog(null, "Registro Eliminado con exito");
             // Se liberan recursos
-            St.close();
-            Conector.close();
+            statement.close();
+            conector.close();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el registro");
             Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
@@ -108,25 +108,25 @@ public class Tipos {
      *
      * @param descripcionTipo recibe la descripcion del tipo de producto
      */
-    public void RegistrarTipo(String descripcionTipo) {
+    public void registrarTipo(String descripcionTipo) {
 
         String Query = "INSERT INTO `sil`.`tipoproductos` (`descripcionTipo`) VALUES ('" + descripcionTipo + "');";
 
         try {
             // Se establece la conexion
-            Conector = Conecta.Conectar();
+            conector = conecta.conectar();
             // Se crea la sentencia
-            St = Conector.createStatement();
+            statement = conector.createStatement();
             // Se ejecuta la sentencia
-            St.executeUpdate(Query);
+            statement.executeUpdate(Query);
             JOptionPane.showMessageDialog(null, "Registro exitoso");
             // Se liberan recursos
-            St.close();
-            Conector.close();
+            statement.close();
+            conector.close();
             // -----En Desarrollo-----Si ya existe un registro con el mismo
             // nombre
-            /* if (Rs.get) { */
-            // St.executeUpdate(Query);
+            /* if (resultSet.get) { */
+            // statement.executeUpdate(Query);
             /*
 			 * } else { JOptionPane.showMessageDialog(null,
 			 * "Ya existe una empresa con el mismo nombre, debe ingresar otro nombre"

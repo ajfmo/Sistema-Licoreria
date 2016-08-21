@@ -28,36 +28,36 @@ import net.sf.jasperreports.view.JasperViewer;
 public class Reportes {
 
     //Variables de la clase, no modificar.
-    private final Conexion Conecta = new Conexion();
-    private Connection Conector;
+    private final Conexion conecta = new Conexion();
+    private Connection conector;
 
-    private JasperReport Jr = null;
-    private JasperPrint Jp = null;
-    private JasperViewer Jv = null;
+    private JasperReport jasperReport = null;
+    private JasperPrint jasperPrint = null;
+    private JasperViewer jasperView = null;
 
-    private String PathReporte;
-    private String TituloReporte;
+    private String pathReporte;
+    private String tituloReporte;
     //Cierre de declaracion de variables.
 
     /**
-     * Metodo CargarReporte: Hace las consultas y llama al reporte para ser
-     * mostrado en pantalla.
+     * Metodo cargarReporte: Hace las consultas y llama al reporte para ser
+ mostrado en pantalla.
      */
-    void CargarReporte(String PathReporte) {
+    void cargarReporte(String PathReporte) {
 
         try {
             // Generar Conexion.
-            Conector = Conecta.Conectar();
+            conector = conecta.conectar();
             // Carga el reporte desde la ubicacion, realiza la conexion, muestra
             // el reporte.
-            Jr = (JasperReport) JRLoader.loadObjectFromFile(PathReporte);
-            Jp = JasperFillManager.fillReport(Jr, null, Conector);
-            Jv = new JasperViewer(Jp, false/* ,Locale.ROOT */);
+            jasperReport = (JasperReport) JRLoader.loadObjectFromFile(PathReporte);
+            jasperPrint = JasperFillManager.fillReport(jasperReport, null, conector);
+            jasperView = new JasperViewer(jasperPrint, false/* ,Locale.ROOT */);
             // Locale sirve para que el viewer se muestre en el lenguaje que se
             // implemente.
-            Jv.setTitle(TituloReporte);
-            Jv.setVisible(true);
-            Conector.close();
+            jasperView.setTitle(tituloReporte);
+            jasperView.setVisible(true);
+            conector.close();
         } catch (JRException | SQLException ex) {
             JOptionPane.showMessageDialog(null,
                     "Error al generar el reporte, revise el archivo de registros"
@@ -72,7 +72,7 @@ public class Reportes {
      */
     public void cierraConexion() {
         try {
-            Conector.close();
+            conector.close();
         } catch (SQLException sqle) {
             // TODO: handle exception
             System.out.println("Error cerrando la conexion");
@@ -82,30 +82,30 @@ public class Reportes {
     }// Cierre del constructor*/
 
     /**
-     * Metodo ReporteLicorerias:
-     *
-     * Este metodo define el titulo y locacion del reporte en cuestion.
+     * Metodo reportarLicorerias:
+
+ Este metodo define el titulo y locacion del reporte en cuestion.
      */
-    public void ReporteLicorerias() {
+    public void reportarLicorerias() {
         // Generar Conexion.
-        TituloReporte = "Reporte de Licorerias";
-        PathReporte = "C:\\Sistema Licorerias\\Reportes\\Reporte-Licorerias.jasper";
+        tituloReporte = "Reporte de Licorerias";
+        pathReporte = "C:\\Sistema Licorerias\\Reportes\\Reporte-Licorerias.jasper";
         // Carga el reporte desde la ubicacion, realiza la conexion, muestra el
         // reporte.
-        CargarReporte(PathReporte);
+        cargarReporte(pathReporte);
     }// Cierre del metodo
 
     /**
-     * Metodo ReporteUsuarios:
-     *
-     * Este metodo define el titulo y locacion del reporte en cuestion.
+     * Metodo reportarUsuarios:
+
+ Este metodo define el titulo y locacion del reporte en cuestion.
      */
-    public void ReporteUsuarios() {
+    public void reportarUsuarios() {
         // Generar Conexion.
-        TituloReporte = "Reporte de Usuarios";
-        PathReporte = "C:\\Sistema Licorerias\\Reportes\\Reporte-Usuarios.jasper";
+        tituloReporte = "Reporte de Usuarios";
+        pathReporte = "C:\\Sistema Licorerias\\Reportes\\Reporte-Usuarios.jasper";
         // Carga el reporte desde la ubicacion, realiza la conexion, muestra el
         // reporte.
-        CargarReporte(PathReporte);
+        cargarReporte(pathReporte);
     }// Cierre del metodo
 }

@@ -17,11 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class Usuarios {
 
-    private final Conexion Conecta = new Conexion();
-    private Connection Conector;
-    private ResultSet Rs;
-    private Statement St;
-    private PreparedStatement Pst;
+    private final Conexion conecta = new Conexion();
+    private Connection conector;
+    private ResultSet resultSet;
+    private Statement statement;
+    private PreparedStatement preparedStatement;
 
     /**
      * Este metodo hace la operacion de acceso mediante una comparacion de los
@@ -31,23 +31,23 @@ public class Usuarios {
      * @param clave recibe la clave del ususario
      * @return data
      */
-    public Object[][] AccedeUsuario(String login, String clave) {
+    public Object[][] accederUsuario(String login, String clave) {
 
-        Conector = Conecta.Conectar();
+        conector = conecta.conectar();
         int registros = 0;
         int usu_id;
 
         try {
             String Query = "SELECT count(1) as cont" + " FROM usuarios";
-            St = Conector.createStatement();
+            statement = conector.createStatement();
             /*
 			 * PreparedStatement pstm = Conn.prepareStatement(Query); ResultSet
-			 * Rs = pstm.executeQuery();
+			 * resultSet = pstm.executeQuery();
              */
-            try (ResultSet Rs = St.executeQuery(Query)) {
+            try (ResultSet Rs = statement.executeQuery(Query)) {
                 /*
 				 * PreparedStatement pstm = Conn.prepareStatement(Query);
-				 * ResultSet Rs = pstm.executeQuery();
+				 * ResultSet resultSet = pstm.executeQuery();
                  */
                 Rs.next();
                 registros = Rs.getInt("cont");
@@ -67,12 +67,12 @@ public class Usuarios {
 
             try {
                 String Query = "SELECT * FROM sil.usuarios WHERE login = '" + login + "' AND clave = '" + clave + "'";
-                St = Conector.createStatement();
+                statement = conector.createStatement();
                 /*
 				 * PreparedStatement pstm = Conn.prepareStatement(Query); try
-				 * (ResultSet Rs = pstm.executeQuery()) {
+				 * (ResultSet resultSet = pstm.executeQuery()) {
                  */
-                try (ResultSet Rs = St.executeQuery(Query)) {
+                try (ResultSet Rs = statement.executeQuery(Query)) {
                     int i = 0;
                     while (Rs.next()) {
                         usu_id = Rs.getInt("idUsuarios");
@@ -90,8 +90,8 @@ public class Usuarios {
                 Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
             } finally {
                 try {
-                    if (Conector != null) {
-                        Conector.close();
+                    if (conector != null) {
+                        conector.close();
                     }
                 } catch (SQLException sqle) {
                     JOptionPane.showMessageDialog(null, "Error al cerrar la conexion");
@@ -107,24 +107,24 @@ public class Usuarios {
      *
      * @param login recibe el login del usuario
      */
-    public void BorrarUsuario(String login) {
+    public void borrarUsuario(String login) {
 
-        Conector = Conecta.Conectar();
+        conector = conecta.conectar();
 
         // Otro Query "delete FROM sil.usuarios where `nombreUsuarios` =
         // 'Ventas';"
         try {
             String Query = "DELETE FROM usuarios WHERE `login`='" + login + "';";
-            St = Conector.createStatement();
-            St.executeUpdate(Query);
+            statement = conector.createStatement();
+            statement.executeUpdate(Query);
             JOptionPane.showMessageDialog(null, "Registro eliminado con exito!");
-            St.close();
+            statement.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error en la actualizacion de datos");
         } finally {
-            if (Conector != null) {
+            if (conector != null) {
                 try {
-                    Conector.close();
+                    conector.close();
                 } catch (SQLException sqle) {
                     JOptionPane.showMessageDialog(null, "Error al cerrar la conexion");
                     Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
@@ -138,58 +138,36 @@ public class Usuarios {
      * datos
      *
      * @param login recibe el login del usuario
-     * @return Rs
+     * @return resultSet
      */
     //Deprecated por mi
     public ResultSet buscarUsuario(String login) {
 
         try {
-            Conector = Conecta.Conectar();
+            conector = conecta.conectar();
             String Query = "SELECT * FROM sil.usuarios where login = ?";
 
             // Prepara la consulta Query
-            Pst = Conector.prepareStatement(Query);
-            Pst.setString(1, login);
+            preparedStatement = conector.prepareStatement(Query);
+            preparedStatement.setString(1, login);
 
             // Ejecuta la consulta
-            Rs = Pst.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
             /*
 			 * Este bloque hace que se pasee por todos los resultados Usando el
-			 * while while (Rs.next()) {
+			 * while while (resultSet.next()) {
 			 * 
 			 * JOptionPane.showMessageDialog(null, " | ID: " +
-			 * Rs.getString("idUsuarios") + " | Login: " + Rs.getString("login")
-			 * + " | Nombre: " + Rs.getString("nombreUsuarios")); St.close();
-			 * Rs.close(); }
+			 * resultSet.getString("idUsuarios") + " | Login: " + resultSet.getString("login")
+			 * + " | Nombre: " + resultSet.getString("nombreUsuarios")); statement.close();
+			 * resultSet.close(); }
              */
         } catch (SQLException SQLe) {
             JOptionPane.showMessageDialog(null, "Error en la consulta");
             Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, SQLe);
         }
-        return Rs;
-    }
-
-    /**
-     * Metodo CerrarConsultas: Este metodo permite cerrar consultas y conexion
-     * sí existen.
-     *
-     */
-    public void cierraConsultas() {
-        try {
-            if (Rs != null) {
-                Rs.close();
-            }
-            if (St != null) {
-                St.close();
-            }
-            if (Conector != null) {
-                Conector.close();
-            }
-        } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Error cerrando la conexion!", "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
-        }
+        return resultSet;
     }
 
     /**
@@ -197,22 +175,22 @@ public class Usuarios {
      * del parametro recibido
      *
      * @param login recive el login del usuario
-     * @return ResultSet Rs
+     * @return ResultSet resultSet
      */
     public ResultSet buscaUsuario(String login) {
 
-        Conector = Conecta.Conectar();
+        conector = conecta.conectar();
         String Query = "SELECT * FROM usuarios WHERE login = '" + login + "'";
         try {
             // Crea la consulta Query
-            St = Conector.createStatement();
+            statement = conector.createStatement();
             // Ejecuta la consulta Query
-            Rs = St.executeQuery(Query);
+            resultSet = statement.executeQuery(Query);
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle, "Error en la consulta de datos", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
         }
-        return Rs;
+        return resultSet;
     }
 
     /**
@@ -223,19 +201,42 @@ public class Usuarios {
      * @param login recibe el login del usuario
      * @param clave recibe el password del usuario
      */
-    public void RegistrarUsuario(String nombreUsuarios, String login, String clave) {
+    public void registrarUsuario(String nombreUsuarios, String login, String clave) {
         try {
-            Conector = Conecta.Conectar();
+            conector = conecta.conectar();
             String Query = "INSERT INTO `sil`.`usuarios` (`nombreUsuarios`," + " `login`, `clave`) VALUES ('"
                     + nombreUsuarios + "', '" + login + "', '" + clave + "');";
-            St = Conector.createStatement();
-            St.executeUpdate(Query);
+            statement = conector.createStatement();
+            statement.executeUpdate(Query);
             JOptionPane.showMessageDialog(null, "Datos ingresados correctamente!");
         } catch (SQLException SQLe) {
             JOptionPane.showMessageDialog(null, "Error en la consulta");
             Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, SQLe);
         }
     }// Cierre del constructor
+
+    /**
+     * Metodo CerrarConsultas: Este metodo permite cerrar consultas y conexion
+     * sí existen.
+     *
+     */
+    
+    public void cierraConsultas() {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            if (conector != null) {
+                conector.close();
+            }
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, "Error cerrando la conexion!", "Error", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(Licorerias.class.getName()).log(Level.SEVERE, null, sqle);
+        }
+    }// Cierre del metodo
 
     /**
      * Metodo aun por definir
@@ -250,8 +251,8 @@ public class Usuarios {
 	 * String Query = "SELECT * FROM sil.usuarios WHERE `nombreUsuarios`='" +
 	 * nombreUsuario + "';";
 	 * 
-	 * try { Statement St = Conector.createStatement(); ResultSet Rs =
-	 * St.executeQuery(Query); JOptionPane.showMessageDialog(null,
+	 * try { Statement statement = conector.createStatement(); ResultSet resultSet =
+	 * statement.executeQuery(Query); JOptionPane.showMessageDialog(null,
 	 * "Conectado como:  " + nombreUsuario); } catch (SQLException sqle) {
 	 * JOptionPane.showMessageDialog(null, "Error en el query de consulta",
 	 * "ERROR", JOptionPane.ERROR_MESSAGE); }
