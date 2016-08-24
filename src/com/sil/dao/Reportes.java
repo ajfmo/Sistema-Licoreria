@@ -61,7 +61,7 @@ public class Reportes {
         } catch (JRException | SQLException ex) {
             JOptionPane.showMessageDialog(null,
                     "Error al generar el reporte, revise el archivo de registros"
-                    + " en C:\\Sistema Licoreria\\Reportes\\Logs",
+                    + " en /Sistema Licoreria/Reporte/Logs",
                     "Error al generar Reporte", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,7 +89,7 @@ public class Reportes {
     public void reportarLicorerias() {
         // Generar Conexion.
         tituloReporte = "Reporte de Licorerias";
-        pathReporte = "C:\\Sistema Licorerias\\Reportes\\Reporte-Licorerias.jasper";
+        pathReporte = "/Sistema Licorerias/Reportes/Reporte-Licorerias.jasper";
         // Carga el reporte desde la ubicacion, realiza la conexion, muestra el
         // reporte.
         cargarReporte(pathReporte);
@@ -103,7 +103,7 @@ public class Reportes {
     public void reportarUsuarios() {
         // Generar Conexion.
         tituloReporte = "Reporte de Usuarios";
-        pathReporte = "C:\\Sistema Licorerias\\Reportes\\Reporte-Usuarios.jasper";
+        pathReporte = "/Sistema Licorerias/Reportes/Reporte-Usuarios.jasper";
         // Carga el reporte desde la ubicacion, realiza la conexion, muestra el
         // reporte.
         cargarReporte(pathReporte);
