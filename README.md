@@ -40,3 +40,7 @@ El sistema propuesto debe cumplir los siguientes requisitos:
 
 
 <a href="https://github.com/ajfmo/Sistema-Licoreria"><img class="wp-image-150 size-full aligncenter" src="http://ajfmo.comxa.com/wp-content/uploads/2016/08/1472121225_github_circle_color.png" alt="Github " width="128" height="128" /></a>
+
+
+
+NOJODA QUE PEO CON ESTO DE GITHUB JAJAJAJA
