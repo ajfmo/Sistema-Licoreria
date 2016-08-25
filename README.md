@@ -38,6 +38,7 @@ El sistema propuesto debe cumplir los siguientes requisitos:
 </ul>
 </li>
 </ol>
+<p style="padding-left: 30px;"><a href="https://github.com/ajfmo/Sistema-Licoreria">Repositorio Git del proyecto.</a></p>
 
 <hr />
 <p style="padding-left: 30px;">Este proyecto es el primero que realizo, 
