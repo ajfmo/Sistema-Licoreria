@@ -27,9 +27,7 @@ El sistema propuesto **debe cumplir los siguientes requisitos**:
 
 ***
 
->####*Este proyecto es el primero que realizo, para el desarrollo se está usando como lenguaje Java y motor de base de datos MySQL, 
-se ha implementado el uso de patrón de diseño MVC. En la actualidad el sistema se encuentra en desarrollo y estamos en la mitad del 
-proceso de desarrollo del 2do requisito.*
+>####*Este proyecto es el primero que realizo, para el desarrollo se está usando como lenguaje Java y motor de base de datos MySQL, se ha implementado el uso de patrón de diseño MVC. En la actualidad el sistema se encuentra en desarrollo y estamos en la mitad del proceso de desarrollo del 2do requisito.*
 
 ---
 
