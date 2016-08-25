@@ -286,7 +286,7 @@ public class OperacionesProductos extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        jTextCodigo.setText("Hola");
+        jTextCodigo.setText("Alo");
         
     }//GEN-LAST:event_btnModificarActionPerformed
 
