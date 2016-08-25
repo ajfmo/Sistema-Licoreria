@@ -154,11 +154,6 @@ public class OperacionesProductos extends javax.swing.JFrame {
 
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/modificar.gif"))); // NOI18N
         btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo.GIF"))); // NOI18N
         btnNuevo.setText("Nuevo");
@@ -283,12 +278,6 @@ public class OperacionesProductos extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-        jTextCodigo.setText("Alo");
-        
-    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * @param args the command line arguments
