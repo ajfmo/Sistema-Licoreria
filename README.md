@@ -40,8 +40,13 @@ El sistema propuesto debe cumplir los siguientes requisitos:
 </ol>
 
 <hr />
-<p style="padding-left: 30px;">Este proyecto es el primero que realizo, para el desarrollo se está usando como lenguaje Java y motor de base de datos MySQL, se ha implementado el uso de patrón de diseño MVC.</p>
-<p style="padding-left: 30px;">En la actualidad el sistema se encuentra en desarrollo y estamos en la mitad del proceso de desarrollo del 2do requisito.</p>
+<p style="padding-left: 30px;">Este proyecto es el primero que realizo, 
+para el desarrollo se está usando como lenguaje Java y motor de base de 
+datos MySQL, se ha implementado el uso de patrón de diseño MVC.</p>
+<p style="padding-left: 30px;">En la actualidad el sistema se encuentra 
+en desarrollo y estamos en la mitad del proceso de desarrollo del 2do requisito.</p>
 
 
-[caption id="attachment_150" align="aligncenter" width="128"]<a href="https://github.com/ajfmo/Sistema-Licoreria"><img class="wp-image-150 size-full" src="http://ajfmo.comxa.com/wp-content/uploads/2016/08/1472121225_github_circle_color.png" alt="Github " width="128" height="128" /></a> Repositorio Git del proyecto[/caption]
+[caption id="attachment_150" align="aligncenter" width="128"]<a href="https://github.com/ajfmo/Sistema-Licoreria">
+<img class="wp-image-150 size-full" src="http://ajfmo.comxa.com/wp-content/uploads/2016/08/1472121225_github_circle_color.png" alt="Github "
+ width="128" height="128" /></a> Repositorio Git del proyecto[/caption]
