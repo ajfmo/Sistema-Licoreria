@@ -1,6 +1,5 @@
 # [Sistema de Inventario para Licorerías:](http://ajfmo.comxa.com/2016/08/25/en-desarrollo/)
-En primera instancia este sistema busca manejar de manera centralizada el flujo de activos en cada deposito del 
-grupo de licorerías LIMAZUCA.
+En primera instancia este sistema busca manejar de manera centralizada el flujo de activos en los deposito de cualquier licorería.
 
 Actualmente se dispone de un sistema hecho en Visual FoxPro con BD en el mismo. A medida que se ha usado el sistema 
 actual la base de datos ha llegado a su tope, trayendo como consecuencia fallas en la ejecución y perdida de información 
