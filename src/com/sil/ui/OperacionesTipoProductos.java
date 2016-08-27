@@ -17,9 +17,9 @@ import com.sil.dao.Tipos;
 
 /**
  * class OperacionesTipoProductos:
-
- Esta clase es la ventana donde se procedera a realizar las operaciones de los
- tipos de productos.
+ *
+ * Esta clase es la ventana donde se procedera a realizar las operaciones de los
+ * tipos de productos.
  *
  * @author Adrian
  */

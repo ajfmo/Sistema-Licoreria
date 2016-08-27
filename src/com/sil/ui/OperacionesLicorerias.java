@@ -12,10 +12,9 @@ import com.sil.dao.Licorerias;
  * @author Adrian Floers
  */
 public class OperacionesLicorerias extends javax.swing.JFrame {
-    
+
     private final Licorerias licoreria;
     private final MenuPrincipal menuPrincipal;
-
 
     /**
      * Creates new form NewJFrame
@@ -178,7 +177,7 @@ public class OperacionesLicorerias extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here: cierra la ventana actual y llama al
         // menu principal.
-        
+
         // Desechamos esta ventana  
         this.dispose();
         // Cierra las consultas y conexiones si estan abiertas

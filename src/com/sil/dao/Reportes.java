@@ -41,7 +41,7 @@ public class Reportes {
 
     /**
      * Metodo cargarReporte: Hace las consultas y llama al reporte para ser
- mostrado en pantalla.
+     * mostrado en pantalla.
      */
     void cargarReporte(String PathReporte) {
 
@@ -83,8 +83,8 @@ public class Reportes {
 
     /**
      * Metodo reportarLicorerias:
-
- Este metodo define el titulo y locacion del reporte en cuestion.
+     *
+     * Este metodo define el titulo y locacion del reporte en cuestion.
      */
     public void reportarLicorerias() {
         // Generar Conexion.
@@ -97,8 +97,8 @@ public class Reportes {
 
     /**
      * Metodo reportarUsuarios:
-
- Este metodo define el titulo y locacion del reporte en cuestion.
+     *
+     * Este metodo define el titulo y locacion del reporte en cuestion.
      */
     public void reportarUsuarios() {
         // Generar Conexion.

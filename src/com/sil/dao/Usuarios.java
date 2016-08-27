@@ -220,7 +220,6 @@ public class Usuarios {
      * sí existen.
      *
      */
-    
     public void cierraConsultas() {
         try {
             if (resultSet != null) {

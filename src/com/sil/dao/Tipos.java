@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Clase Tipos: Esta clase permite el uso de la tabla tipoproductos de la
- base de datos.
+ * Clase Tipos: Esta clase permite el uso de la tabla tipoproductos de la base
+ * de datos.
  *
  *
  * @author Adrian
@@ -30,7 +30,7 @@ public class Tipos {
 
     /**
      * Metodo cerrarConsultas: Este metodo permite cerrar consultas y conexion
- sí existen.
+     * sí existen.
      *
      */
     public void cerrarConsultas() {

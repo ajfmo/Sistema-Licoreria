@@ -54,6 +54,7 @@ public class Licorerias {
     /**
      * Metodo MostrarRegistros Muestra en el combobox la lista de empresas
      * disponibles en la base de datos
+     *
      * @param jCombo
      */
     public void mostrarRegistros(JComboBox jCombo) {

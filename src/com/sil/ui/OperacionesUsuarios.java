@@ -16,7 +16,7 @@ import com.sil.dao.Usuarios;
 
 /**
  * Esta clase es la ventana de registros de usuarios, se hace el llamado los
- distintos metodos de la clase Usuarios.
+ * distintos metodos de la clase Usuarios.
  *
  * @author Adrian
  * @version 1
