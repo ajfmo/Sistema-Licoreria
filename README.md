@@ -32,8 +32,3 @@ El sistema propuesto **debe cumplir los siguientes requisitos**:
 
 <p align="center"><a href="https://github.com/ajfmo/Sistema-Licoreria">
         <img class="wp-image-150 size-full aligncenter" src="http://i0.wp.com/ajfmo.comxa.com/wp-content/uploads/2016/08/1472121225_github_circle_color.png?resize=128%2C128" alt="Github " height="128" width="128"></a></p>
-
-
-```JAVA
-                 NOJODA QUE PEO CON ESTO DE GITHUB JAJAJAJA
-```
